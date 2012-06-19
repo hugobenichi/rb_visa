@@ -13,19 +13,21 @@ module RbVisa
       buffer_grow command.length
       @string_buffer.write_string command
       @read_count ||= FFI::MemoryPointer.new :uint32, 1     
-      check VISA::viWrite @session, @string_buffer, command.length, @read_count
+      check VISA::viWrite @session, @string_buffer, command.length, @read_count      
+puts "write count %i" % @read_count.read_uint32
       self     
     end
 
-    def read bytes = 0
+    def read bytes = @string_buffer_length
       buffer_grow bytes
       @read_count ||= FFI::MemoryPointer.new :uint32, 1     
       check VISA::viRead @session, @string_buffer, bytes, @read_count
+puts "read count %i" % @read_count.read_uint32
       @string_buffer.read_string
     end 
     
-    alias_method :puts, :write
-    alias_method :gets, :read
+    #alias_method :puts, :write
+    #alias_method :gets, :read
     
     def << command
       self.write command

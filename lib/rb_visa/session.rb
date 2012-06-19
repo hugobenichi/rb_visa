@@ -1,6 +1,6 @@
 module RbVisa
 
-  class Session  #<TO_DO> add error checking
+  class Session
   
     attr_reader :session, :rm, :status, :address
  
@@ -29,14 +29,14 @@ module RbVisa
     end
     
     def check status
-      puts self.status? if 0 > (@status = status)
+      puts self.status? if 0 != (@status = status)
       self
     end
     
     def status?
-      @string_buffer ||= FFI::MemoryPointer.new :char, 256
-      check VISA::viStatusDesc @session, @status, @string_buffer
-      @string_buffer.read_string
+      @error_buffer ||= FFI::MemoryPointer.new :char, 256
+      VISA::viStatusDesc @session, @status, @error_buffer
+      @error_buffer.read_string
     end
     
     def clear

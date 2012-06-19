@@ -16,11 +16,11 @@ module RbVisa
           :int32],     
 
         [ :viClose, 
-          [:uint32]           # session/ressource manager handle
+          [:uint32],          # session/ressource manager handle
           :int32],    
         
         [ :viClear, 
-          [:uint32]           # session/ressource manager handle
+          [:uint32],          # session/ressource manager handle
           :int32],  
           
         [ :viStatusDesc,
