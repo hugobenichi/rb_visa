@@ -10,15 +10,11 @@ task :test_global do
   ruby "test/test_rbvisa.rb"
 end
 
-task :gem_install => [:gem_build, :rdoc] do
+task :gem_install => :gem_build do
   gemfile = Dir.new("./").entries.select{ |f| f =~ /rb_visa-[\d]+\.[\d]+\.[\d]+.gem/ }[0]
-  sh "sudo gem install %s" % gemfile
+  sh "gem install %s" % gemfile
 end
 
-task :gem_build => :compile do
+task :gem_build do
   sh "gem build %s.gemspec" % name
-end
-  
-task :rdoc do  
-  sh 'rdoc lib' 
 end

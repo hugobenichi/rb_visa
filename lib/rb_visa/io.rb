@@ -14,7 +14,7 @@ module RbVisa
       @string_buffer.write_string command
       @read_count ||= FFI::MemoryPointer.new :uint32, 1     
       check VISA::viWrite @session, @string_buffer, command.length, @read_count      
-puts "write count %i" % @read_count.read_uint32
+#puts "write count %i" % @read_count.read_uint32
       self     
     end
 
@@ -22,12 +22,9 @@ puts "write count %i" % @read_count.read_uint32
       buffer_grow bytes
       @read_count ||= FFI::MemoryPointer.new :uint32, 1     
       check VISA::viRead @session, @string_buffer, bytes, @read_count
-puts "read count %i" % @read_count.read_uint32
-      @string_buffer.read_string
+#puts "read count %i" % @read_count.read_uint32
+      @string_buffer.read_string(@read_count.read_uint32).chomp
     end 
-    
-    #alias_method :puts, :write
-    #alias_method :gets, :read
     
     def << command
       self.write command
@@ -56,20 +53,25 @@ puts "read count %i" % @read_count.read_uint32
       #read the size of the header tag
       check VISA::viRead @session, @string_buffer, 1, @read_count
       data_size_tag_size = @string_buffer.read_char - offset
-
+#puts "data_size_tag size: %i" % data_size_tag_size
+      
       #read the header tag and parse into an int
-      check VISA::viRead @session, @string_buffer, data_size_tag_size, @read_count      
-      @string_buffer.read_array_of_char(data_size_tag_size).map{ |c|
+      check VISA::viRead @session, @string_buffer, data_size_tag_size, @read_count    
+      size = @string_buffer.read_array_of_char(data_size_tag_size).map{ |c|
         c - offset
       }.join.to_i     
+puts "data size: %i" % size    
+      size
     end
     
     def mread_into chunk, &next_buffer   
       total = 0
       (self.parse / chunk).times do 
-        VISA::viRead @session, next_buffer.call, chunk, @read_count   
+        VISA::viRead @session, next_buffer.call, chunk, @read_count  
+puts "mread read count %i" % @read_count.read_uint32 
         total += @read_count.read_uint32
       end
+      total
     end
     
     def mread_to chunk, &handle_data

@@ -28,6 +28,10 @@ module RbVisa
 	    asrl_in:  VI_ASRL_IN_BUF,
 	    asrl_out: VI_ASRL_OUT_BUF,
 	  }
+    
+    # other attributes
+    VI_ATTR_TMO_VALUE       = "3fff001a".hex
+    VI_TMO_INFINITE         = "FFFFFFFF".hex
 
 	end
 	
