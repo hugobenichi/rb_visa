@@ -31,7 +31,7 @@ module RbVisa
     end
     
     def check status
-      puts self.status? if 0 != (@status = status)
+      puts self.status? if 0 > (@status = status)
       self
     end
     
