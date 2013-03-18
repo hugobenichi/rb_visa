@@ -1,5 +1,3 @@
-
-
 Gem::Specification.new do |spec|
 
   spec.name        = 'rb_visa'
@@ -8,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.summary     = "Ruby wrapper to NI-VISA API for measurement devices automation"
   spec.description = "A Ruby layer wrapping around the Ni-VISA calls. Based on the ffi gem"
   spec.authors     = ["Hugo Benichi"]
-  spec.email       = 'hugo.benichi@m4x.org'
+  spec.email       = 'hugo[dot]benichi[at]m4x[dot]org'
   spec.homepage    = "http://github.com/hugobenichi/rb_visa"
   
   spec.files       = Dir.glob( 'lib/**/*.{rb}') 
@@ -17,8 +15,6 @@ Gem::Specification.new do |spec|
   spec.files      << 'rakefile.rb'
   spec.files      << 'README'
   
-  
+  spec.add_dependency 'ffi'  
+
 end
-  
-
-

@@ -1,31 +1,22 @@
-##
- #                              RbVisa
- #
- #  Ruby wrapper around National Instrument implementation of the visa API
- #  Allows easy scripting for control of your favorite oscilloscopes
- #
- #  author      hugo benichi
- #  email       hugo.benichi@m4x.org
- #  copyright   2012 hugo benichi
- #  homepage    http://github.com/hugobenichi/rb_visa
- #  
- #
- ##
- 
- 
- installation:
- 
-    run "rake gem_install" a the /rb_visa root directory
-    
-  usage:
-    
+
+                              RbVisa
+
+  Ruby wrapper around National Instrument visa library.
+  Allows easy scripting for control of your favorite oscilloscopes
+
+  author      hugo benichi
+  email       hugo [dot] benichi [at] m4x [dot] org
+  copyright   2012 hugo benichi
+  homepage    http://github.com/hugobenichi/rb_visa
+
+  Installation:
+
+    run "rake gem_install" from the /rb_visa root directory to install the gem
+    in your ruby gem directory.
+
+    rb_visa assumes that the National Instrument drivers are already installed
+    on your system.
+
+  Usage:
+
     see examples scripts in /rb_visa/test/
-    
-  to_do
-  
-    error handling
-    differneces between viRead and viBufRead
-    attributes list ?
-    reimplement parse and read in C for better efficiency
-    
-  https://dl.dropbox.com/u/26864813/mingw-get-inst-20120426.exe
