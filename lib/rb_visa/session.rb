@@ -20,7 +20,7 @@ module RbVisa
             puts "session opened"
             @session = mem.read_uint32
 
-            @string_buffer_len = 128
+            @string_buffer_len = 65536
             @string_buffer = FFI::MemoryPointer.new :char, @string_buffer_len
 
             self.instance_eval &block if block
